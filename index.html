@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM | Official Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #06060c;
+            --card-bg: rgba(14, 14, 26, 0.75);
+            --accent-blue: #00f0ff;
+            --accent-pink: #ff007f;
+            --discord-color: #5865F2;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(0, 240, 255, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(255, 0, 127, 0.08) 0px, transparent 50%);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .portfolio-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 32px;
+            width: 450px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-container:hover {
+            border-color: rgba(0, 240, 255, 0.2);
+            box-shadow: 0 40px 100px rgba(0, 240, 255, 0.05);
+        }
+
+        /* Profile Header */
+        .profile-header { text-align: center; margin-bottom: 30px; }
+        
+        .avatar-wrapper { position: relative; display: inline-block; margin-bottom: 20px; }
+        
+        #avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+        }
+
+        .status-badge {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            border: 4px solid #0e0e1a;
+            background-color: #747f8d;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 32px;
+            letter-spacing: 4px;
+            margin-bottom: 5px;
+        }
+
+        .role {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Sections Styling */
+        .section-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-pink);
+            margin: 25px 0 12px 0;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 5px;
+        }
+
+        #bio { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+
+        .grid-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        
+        .grid-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .grid-item.highlight {
+            border-color: rgba(0, 240, 255, 0.3);
+            color: var(--accent-blue);
+        }
+
+        .spec-info { font-size: 14px; color: var(--text-muted); }
+        .spec-info span { color: var(--text-main); font-weight: 600; }
+
+        /* Premium Discord Button */
+        .discord-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--discord-color);
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            margin-top: 25px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .discord-btn:hover {
+            background-color: #4752c4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+        }
+
+        /* Activity Footer */
+        #activity {
+            margin-top: 25px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portfolio-container">
+        <div class="profile-header">
+            <div class="avatar-wrapper">
+                <img id="avatar" src="" alt="SAM">
+                <div id="status-indicator" class="status-badge"></div>
+            </div>
+            <h1>SAM</h1>
+            <div class="role">Digital Coder & Creative Mind</div>
+        </div>
+
+        <div class="section-title">About Me</div>
+        <p id="bio">Loading profile intelligence...</p>
+
+        <div class="section-title">Favorite Games</div>
+        <div class="grid-list">
+            <div class="grid-item">Minecraft</div>
+            <div class="grid-item">Roblox</div>
+            <div class="grid-item">Free Fire</div>
+        </div>
+
+        <div class="section-title">Favorite Creator</div>
+        <div class="grid-list">
+            <div class="grid-item highlight">Banana Chip YT 🍌</div>
+        </div>
+
+        <div class="section-title">Hardware Architecture</div>
+        <div class="spec-info">
+            Primary Device: <span>Samsung Galaxy A16 5G</span>
+        </div>
+
+        <!-- Discord Invite Link added successfully below -->
+        <a href="https://discord.gg/zcTA3RPmc" target="_blank" class="discord-btn">
+            Join My Discord Server
+        </a>
+
+        <div id="activity">Syncing Presence...</div>
+    </div>
+
+    <script>
+        // ⚠️ PUT YOUR DISCORD USER ID HERE (18-digit number)
+        const DISCORD_ID = "1145383325280764005"; 
+
+        async function updatePortfolio() {
+            try {
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+                const parsed = await res.json();
+                
+                if (parsed.success) {
+                    const data = parsed.data;
+                    const user = data.discord_user;
+                    const status = data.discord_status;
+                    const activities = data.activities;
+
+                    document.getElementById('avatar').src = user.avatar 
+                        ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`
+                        : `https://cdn.discordapp.com/embed/avatars/0.png`;
+
+                    document.getElementById('bio').innerText = data.kv?.bio || "Independent developer specializing in code modularity, server optimizations, and modern gaming implementations.";
+
+                    const dot = document.getElementById('status-indicator');
+                    if (status === 'online') {
+                        dot.style.backgroundColor = '#43b581';
+                    } else if (status === 'idle') {
+                        dot.style.backgroundColor = '#faa61a';
+                    } else if (status === 'dnd') {
+                        dot.style.backgroundColor = '#f04747';
+                    } else {
+                        dot.style.backgroundColor = '#747f8d';
+                    }
+
+                    const actDisplay = document.getElementById('activity');
+                    if (activities && activities.length > 0) {
+                        const gaming = activities.find(a => a.type === 0);
+                        if (gaming) {
+                            actDisplay.innerText = `🎮 Currently Playing: ${gaming.name}`;
+                        } else if (activities[0].state) {
+                            actDisplay.innerText = `✨ Status: ${activities[0].state}`;
+                        }
+                    } else {
+                        actDisplay.innerText = status !== 'offline' ? "⚡ System Operational" : "System Offline";
+                    }
+                }
+            } catch (err) {
+                console.error("Data integration fault:", err);
+            }
+        }
+
+        updatePortfolio();
+        setInterval(updatePortfolio, 15000);
+    </script>
+</body>
+</html>
