@@ -1,87 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>SAM | Emerald Terminal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --emerald: #50c878; --dark: #050a05; }
-        body { background: var(--dark); color: white; font-family: 'Space Mono', monospace; margin: 0; display: flex; justify-content: center; padding: 20px; }
-        
-        /* Blur Background Video */
-        .bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: blur(20px) brightness(0.3); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAM</title>
 
-        .container { max-width: 450px; width: 100%; }
-        .card { background: rgba(10, 20, 10, 0.6); border: 1px solid var(--emerald); padding: 20px; border-radius: 15px; margin-bottom: 20px; backdrop-filter: blur(10px); }
-        
-        /* Typing Effect Text */
-        .typing-text { color: var(--emerald); font-weight: bold; border-right: 2px solid var(--emerald); padding-right: 5px; animation: blink 0.7s infinite; }
-        @keyframes blink { 50% { border-color: transparent; } }
+<style>
+body {
+    margin:0;
+    font-family: Arial;
+    background: linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
+    color:white;
+    overflow:hidden;
+}
 
-        .tech-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .tech-pill { border: 1px solid var(--emerald); padding: 8px; text-align: center; border-radius: 5px; font-size: 12px; }
-    </style>
+/* INTRO */
+#intro {
+    position:fixed;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:black;
+}
+
+#samText {
+    font-size:65px;
+    letter-spacing:15px;
+    opacity:0;
+    text-shadow:0 0 10px #00f0ff, 0 0 30px #00f0ff, 0 0 60px #00f0ff;
+    transition:1s;
+}
+
+#cat {
+    width:220px;
+    position:absolute;
+    left:-300px;
+    bottom:60px;
+    transition:4s linear;
+    filter: drop-shadow(0 0 20px cyan);
+}
+
+/* MAIN */
+#main {
+    display:none;
+    padding:20px;
+    text-align:center;
+}
+
+.hero img {
+    width:160px;
+    border-radius:20px;
+    box-shadow:0 0 20px cyan;
+}
+
+.links a {
+    display:block;
+    margin:10px;
+    padding:12px;
+    border:1px solid #00f0ff;
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+}
+
+.links a:hover {
+    background:#00f0ff;
+    color:black;
+    box-shadow:0 0 15px #00f0ff;
+}
+
+h1 {
+    text-shadow:0 0 20px #00f0ff;
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Emerald Blur Background -->
-    <video autoplay loop muted playsinline class="bg-video">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-green-particles-background-35756-large.mp4" type="video/mp4">
-    </video>
+<!-- INTRO -->
+<div id="intro">
+    <div id="samText">S A M</div>
+    <img id="cat" src="https://cataas.com/cat?width=400" />
+    <audio id="bgm" src="https://files.catbox.moe/3x9k8f.mp3"></audio>
+</div>
 
-    <div class="container">
-        <!-- Identity Card -->
-        <div class="card">
-            <h1>SAM</h1>
-            <p>Accessing System: <span class="typing-text" id="typewriter"></span></p>
-        </div>
+<!-- MAIN -->
+<div id="main">
 
-        <!-- Tech Stack -->
-        <div class="card">
-            <h3 style="color: var(--emerald);">CORE ARCHITECTURE</h3>
-            <div class="tech-list">
-                <div class="tech-pill">PYTHON</div>
-                <div class="tech-pill">HTML/CSS</div>
-                <div class="tech-pill">C++</div>
-                <div class="tech-pill">JAVA</div>
-            </div>
-        </div>
+    <h1>SAM</h1>
 
-        <!-- Discord Profile -->
-        <div class="card">
-            <h3 style="color: var(--emerald);">DISCORD_IDENTITY</h3>
-            <div id="dc-widget" style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
-                <img id="avatar" src="" style="width: 50px; border-radius: 50%; border: 2px solid var(--emerald);">
-                <div>
-                    <div id="ds-user" style="font-weight: bold;">Loading...</div>
-                    <div id="ds-status" style="font-size: 12px; color: #888;">Syncing...</div>
-                </div>
-            </div>
-        </div>
+    <div class="hero">
+        <img src="https://cataas.com/cat?width=400">
     </div>
 
-    <script>
-        // Typing Effect Script
-        const roles = ["GAMER", "CREATIVE MIND", "DEVELOPER", "ROBLOX PRO"];
-        let roleIdx = 0, charIdx = 0;
-        function type() {
-            const el = document.getElementById("typewriter");
-            el.innerText = roles[roleIdx].substring(0, charIdx);
-            charIdx++;
-            if(charIdx > roles[roleIdx].length) { charIdx = 0; roleIdx = (roleIdx + 1) % roles.length; }
-            setTimeout(type, 150);
-        }
-        type();
+    <p>🔥 Gaming • Developer • Creator 😎</p>
 
-        // Discord Data
-        async function fetchDC() {
-            const res = await fetch("https://api.lanyard.rest/v1/users/1145383325280764005");
-            const data = (await res.json()).data;
-            document.getElementById('avatar').src = `https://cdn.discordapp.com/avatars/${data.discord_user.id}/${data.discord_user.avatar}.png`;
-            document.getElementById('ds-user').innerText = data.discord_user.username;
-            document.getElementById('ds-status').innerText = data.discord_status.toUpperCase();
-        }
-        fetchDC();
-    </script>
+    <h2>💻 Skills</h2>
+    <p>Python • Java • C++ • HTML • CSS</p>
+
+    <h2>🎥 Fav YouTubers</h2>
+    <div class="links">
+        <a href="https://youtube.com/@akshayakz" target="_blank">Akshay AKZ</a>
+        <a href="https://youtube.com/@ashvinshibu" target="_blank">Ashvin Shibu</a>
+        <a href="https://youtube.com/@malludiscoverytv" target="_blank">Mallu Discovery TV</a>
+        <a href="https://youtube.com/@bananachipyt" target="_blank">BananaChipYT</a>
+    </div>
+
+    <h2>💬 Discord</h2>
+    <div class="links">
+        <a href="https://discord.gg/zcTA3RPmc" target="_blank">🔥 Join My Server</a>
+    </div>
+
+    <p>Discord ID: 1145383325280764005</p>
+
+</div>
+
+<script>
+
+let cat = document.getElementById("cat");
+let text = document.getElementById("samText");
+let bgm = document.getElementById("bgm");
+
+// autoplay fix
+window.addEventListener("click", ()=>{
+    bgm.play();
+}, {once:true});
+
+// cat walk
+setTimeout(()=>{
+    cat.style.left = "38%";
+},500);
+
+// SAM text glow
+setTimeout(()=>{
+    text.style.opacity = "1";
+},3000);
+
+// end intro
+setTimeout(()=>{
+    document.getElementById("intro").style.display="none";
+    document.getElementById("main").style.display="block";
+    document.body.style.overflow="auto";
+    bgm.pause();
+},8000);
+
+</script>
+
 </body>
 </html>
