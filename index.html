@@ -194,6 +194,12 @@
         <div class="spec-info">
             Primary Device: <span>Samsung Galaxy A16 5G</span>
         </div>
+        <div class="section-title">Discord Status</div>
+        <div class="grid-list" style="flex-direction: column; gap: 5px; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); text-align: left;">
+            <div style="font-size: 14px; color: var(--text-muted)">Username: <span id="ds-username" style="color: white; font-weight: 600;">Loading...</span></div>
+            <div style="font-size: 14px; color: var(--text-muted)">Custom Status: <span id="ds-custom" style="color: white; font-weight: 600;">None</span></div>
+            <div style="font-size: 14px; color: var(--text-muted)">Current State: <span id="ds-state" style="color: white; font-weight: 600;">Offline</span></div>
+        </div>
 
         <!-- Discord Invite Link added successfully below -->
         <a href="https://discord.gg/zcTA3RPmc" target="_blank" class="discord-btn">
@@ -203,8 +209,7 @@
         <div id="activity">Syncing Presence...</div>
     </div>
 
-    <script>
-        // ⚠️ PUT YOUR DISCORD USER ID HERE (18-digit number)
+        <script>
         const DISCORD_ID = "1145383325280764005"; 
 
         async function updatePortfolio() {
@@ -218,29 +223,43 @@
                     const status = data.discord_status;
                     const activities = data.activities;
 
+                    // Update Avatar
                     document.getElementById('avatar').src = user.avatar 
                         ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`
                         : `https://cdn.discordapp.com/embed/avatars/0.png`;
 
+                    // Update Bio
                     document.getElementById('bio').innerText = data.kv?.bio || "Independent developer specializing in code modularity, server optimizations, and modern gaming implementations.";
 
+                    // Update New Discord Status Category
+                    document.getElementById('ds-username').innerText = `${user.username}`;
+                    
+                    const customAct = activities.find(a => a.type === 4);
+                    document.getElementById('ds-custom').innerText = customAct && customAct.state ? customAct.state : "No custom status set";
+
+                    let statusText = "Offline";
                     const dot = document.getElementById('status-indicator');
                     if (status === 'online') {
                         dot.style.backgroundColor = '#43b581';
+                        statusText = "Online 🟢";
                     } else if (status === 'idle') {
                         dot.style.backgroundColor = '#faa61a';
+                        statusText = "Idle 🌙";
                     } else if (status === 'dnd') {
                         dot.style.backgroundColor = '#f04747';
+                        statusText = "Do Not Disturb 🔴";
                     } else {
                         dot.style.backgroundColor = '#747f8d';
                     }
+                    document.getElementById('ds-state').innerText = statusText;
 
+                    // Update Bottom Live Activity
                     const actDisplay = document.getElementById('activity');
                     if (activities && activities.length > 0) {
                         const gaming = activities.find(a => a.type === 0);
                         if (gaming) {
                             actDisplay.innerText = `🎮 Currently Playing: ${gaming.name}`;
-                        } else if (activities[0].state) {
+                        } else if (activities[0].state && activities[0].type !== 4) {
                             actDisplay.innerText = `✨ Status: ${activities[0].state}`;
                         }
                     } else {
@@ -255,5 +274,6 @@
         updatePortfolio();
         setInterval(updatePortfolio, 15000);
     </script>
+
 </body>
 </html>
