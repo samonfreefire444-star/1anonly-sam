@@ -3,37 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAM | Official Portfolio</title>
+    <title>SAM | Cyber Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #06060c;
-            --card-bg: rgba(14, 14, 26, 0.75);
-            --accent-blue: #00f0ff;
-            --accent-pink: #ff007f;
-            --discord-color: #5865F2;
+            --bg-dark: #030307;
+            --panel-bg: rgba(10, 10, 20, 0.6);
+            --neon-cyan: #00f0ff;
+            --neon-magenta: #ff007f;
+            --neon-purple: #9d4edd;
             --text-main: #ffffff;
-            --text-muted: #94a3b8;
+            --text-muted: #64748b;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(0, 240, 255, 0.1) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(255, 0, 127, 0.08) 0px, transparent 50%);
+            background-color: var(--bg-dark);
             color: var(--text-main);
-            font-family: 'Space Grotesk', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             min-height: 100vh;
             padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
         }
+
+        /* 🌌 Liquid Neon Glow Background */
+        .cyber-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(255, 0, 127, 0.08) 0%, transparent 40%);
+            filter: blur(40px);
+            animation: pulseBg 10s infinite alternate;
+        }
+        @keyframes pulseBg {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .layout-wrapper {
+            width: 100%; max-width: 480px;
+            display: flex; flex-direction: column; gap: 20px; z-index: 1;
+        }
+
+        /* Glassmorphism Base Card */
+        .panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .panel:hover { border-color: rgba(0, 240, 255, 0.15); }
+
+        /* 🎯 Ultra-Realistic Discord Profile Card */
+        .discord-card {
+            padding: 0; overflow: hidden; background: #0f0f1c; border: 1px solid rgba(88, 101, 242, 0.2);
+        }
+        .discord-banner {
+            height: 100px; background: #5865F2; /* Will auto-update if banner exists */
+            position: relative;
+        }
+        .discord-badges {
+            position: absolute; right: 16px; bottom: -45px; display: flex; gap: 6px; background: rgba(0,0,0,0.4); padding: 4px 8px; border-radius: 8px;
+        }
+        .badge-icon { width: 22px; height: 22px; }
+        .discord-avatar-space {
+            padding: 0 20px; margin-top: -55px; display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        .avatar-wrap { position: relative; display: inline-block; }
+        #avatar {
+            width: 95px; height: 95px; border-radius: 50%; border: 6px solid #0f0f1c; background: #000;
+        }
+        .dc-status-dot {
+            width: 24px; height: 24px; border-radius: 50%; position: absolute; bottom: 4px; right: 4px; border: 4px solid #0f0f1c; background: #747f8d;
+        }
+        .discord-profile-details { padding: 20px; }
+        .dc-name { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+        .dc-username { font-size: 14px; color: #b5bac1; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .dc-custom-status { background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; font-size: 13px; margin-top: 12px; border-left: 3px solid var(--neon-cyan); color: #dbdee1; }
+        
+        .dc-divider { height: 1px; background: rgba(255,255,255,0.05); margin: 16px 0; }
+        .dc-meta-title { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #949ba4; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .dc-meta-value { font-size: 13px; color: #dbdee1; }
+
+        /* Connections Container */
+        .conn-row { display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.2); padding: 10px 14px; border-radius: 10px; margin-bottom: 8px; font-size: 13px; }
+        .conn-left { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+        .conn-icon { width: 20px; height: 20px; }
+        .conn-verified { color: #00f0ff; font-size: 12px; }
+
+        /* Typography & Badges */
+        .section-title { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--neon-magenta); margin-bottom: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .section-title::before { content: '//'; color: var(--neon-cyan); }
+        .role { font-size: 13px; font-weight: 700; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 1.5px; text-align: center; margin-top: -5px; }
+        .badge-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .badge-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; }
+
+        /* Creator Item Style */
+        .creator-card { display: flex; align-items: center; gap: 14px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.04); padding: 12px; border-radius: 14px; text-decoration: none; color: white; transition: all 0.2s; }
+        .creator-card:hover { border-color: var(--neon-purple); background: rgba(255,255,255,0.04); }
+
+        .action-btn { display: block; text-align: center; background: #5865F2; color: white; text-decoration: none; padding: 16px; border-radius: 16px; font-weight: 700; font-size: 15px; transition: all 0.2s; box-shadow: 0 4px 20px rgba(88, 101, 242, 0.3); }
+        .action-btn:hover { transform: translateY(-2px); background: #4752c4; }
+    </style>
+</head>
+<body>
+
+    <div class="cyber-bg"></div>
+
+    <div class="layout-wrapper">
+        
+        <!-- 🎯 Core Discord Full-Profile Panel -->
+        <div class="panel discord-card">
+            <!-- Dynamic Banner Background Color -->
+            <div id="dc-banner" class="discord-banner">
+                <!-- Badges Matrix Loaded Dynamically -->
+                <div class="discord-badges">
+                    <!-- Nitro Badge Base -->
+                    <img class="badge-icon" src="https://cdn.jsdelivr.net/gh/ErickSosa/discord-badges/svg/nitro.svg" alt="Nitro">
+                    <!-- Active Developer Badge Base -->
+                    <img class="badge-icon" src="https://cdn.jsdelivr.net/gh/ErickSosa/discord-badges/svg/activedeveloper.svg" alt="Active Developer">
+                </div>
+            </div>
+            
+            <div class="discord-avatar-space">
+                <div class="avatar-wrap">
+                    <img id="avatar" src="" alt="SAM">
+                    <div id="status-indicator" class="dc-status-dot"></div>
+                </div>
+            </div>
+
+            <div class="discord-profile-details">
+                <div class="dc-name">SAM</div>
+                <div class="dc-username">dc.saaaaaaaaam <span style="color:var(--neon-purple);">💜 Víηε</span></div>
+                
+                <!-- Live Bio / Custom Status Message -->
+                <div id="ds-custom" class="dc-custom-status">Scanning active user data matrix...</div>
+                
+                <div class="dc-divider"></div>
+                
+                <!-- Account Meta -->
+                <div class="dc-meta-title">Member Since</div>
+                <div class="dc-meta-value">Aug 27, 2023</div>
+                
+                <div class="dc-divider"></div>
+
+                <!-- Verified External Core Connections -->
+                <div class="dc-meta-title">Connections</div>
+                
+                <div class="conn-row">
+                    <div class="conn-left">
+                        <img class="conn-icon" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/roblox.svg" style="filter: invert(1);" alt="Roblox">
+                        <span>rb_saaam</span>
+                    </div>
+                    <span class="conn-verified">✔ Verified</span>
+                </div>
+
+                <div class="conn-row">
+                    <div class="conn-left">
+                        <img class="conn-icon" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" style="filter: initial;" alt="YouTube">
+                        <span>saaaaaaaaam</span>
+                    </div>
+                    <span class="conn-verified">✔ Verified</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🚀 Matrix Word Changing Core -->
+        <div class="role">TERMINAL ACCESS: <span id="changing-text" style="color: var(--neon-magenta);">GAMER</span></div>
+
+        <!-- Ecosystem Panel -->
+        <div class="panel">
+            <div class="section-title">Ecosystem & Hardware</div>
+            <div class="badge-list" style="margin-bottom: 14px;">
+                <div class="badge-item">Minecraft</div>
+                <div class="badge-item">Roblox</div>
+                <div class="badge-item">Free Fire</div>
+            </div>
+            <p style="font-size: 13px; color: var(--text-muted);">Main Terminal Device: <span style="color:#fff; font-weight:600;">Samsung Galaxy A16 5G</span></p>
+        </div>
+
+        <!-- Streaming Squad Panel -->
+        <div class="panel">
+            <div class="section-title">Streaming Squad Matrix</div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a href="https://youtube.com/@bananachipyt?si=4HqMMyNTOVgtWjAG" target="_blank" class="creator-card">
+                    <div style="font-weight: 700; font-size: 14px;">Banana Chip YT 🍌</div>
+                </a>
+                <a href="https://youtube.com/@akshayakz?si=MiDPw3vWahG3DK9_" target="_blank" class="creator-card">
+                    <div style="font-weight: 700; font-size: 14px;">Akshay AKZ 🎮</div>
+                </a>
+                <a href="https://youtube.com/@ashvinshibu?si=e_myz2zIOcyo0U60" target="_blank" class="creator-card">
+                    <div style="font-weight: 700; font-size: 14px;">Ashvin Shibu 🎬</div>
+                </a>
+                <a href="https://youtube.com/@malludiscoverytv?si=63V8naa60E_2slbB" target="_blank" class="creator-card">
+                    <div style="font-weight: 700; font-size: 14px;">Mallu Discovery TV 🌍</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Action Button -->
+        <a href="https://discord.gg/zcTA3RPmc" target="_blank" class="action-btn">
+            Connect On Discord Server
+        </a>
+    </div>
+
+    <script>
+        const DISCORD_ID = "1145383325280764005"; 
+
+        // Live API Synchronizer Core
+        async function fetchDiscordData() {
+            try {
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+                const parsed = await res.json();
+                
+                if (parsed.success) {
+                    const data = parsed.data;
+                    const user = data.discord_user;
+                    const status = data.discord_status;
+                    const activities = data.activities;
+
+                    // Update Live Avatar Image Asset
+                    document.getElementById('avatar').src = user.avatar 
+                        ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`
+                        : `https://cdn.discordapp.com/embed/avatars/0.png`;
+
+                    // Update Live Dynamic Custom Status or Activity String
+                    const customAct = activities.find(a => a.type === 4);
+                    const gamingAct = activities.find(a => a.type === 0);
+                    
+                    if (gamingAct) {
+                        document.getElementById('ds-custom').innerText = `🎮 Playing: ${gamingAct.name}`;
+                    } else if (customAct && customAct.state) {
+                        document.getElementById('ds-custom').innerText = `"${customAct.state}"`;
+                    } else {
+                        document.getElementById('ds-custom').innerText = "No status set. System idling.";
+                    }
+
+                    // Mapping Status Dot Signals
+                    const dot = document.getElementById('status-indicator');
+                    if (status === 'online') { dot.style.backgroundColor = '#23a55a'; }
+                    else if (status === 'idle') { dot.style.backgroundColor = '#f0b232'; }
+                    else if (status === 'dnd') { dot.style.backgroundColor = '#f23f43'; }
+                    else { dot.style.backgroundColor = '#80848e'; }
+                }
+            } catch (err) {
+                console.error("Matrix Sync Error:", err);
+            }
+        }
+
+        // 🔄 Swapping Text Algorithm Engine Module
+        const swapWords = ["GAMER", "DIGITAL CODER", "CREATIVE MIND", "ROBLOX PRO"];
+        let swapIndex = 0;
+        setInterval(() => {
+            swapIndex = (swapIndex + 1) % swapWords.length;
+            document.getElementById('changing-text').innerText = swapWords[swapIndex];
+        }, 3000);
+
+        // Run Operations
+        fetchDiscordData();
+        setInterval(fetchDiscordData, 15000);
+    </script>
+</body>
+</html>
 
         .portfolio-container {
             background: var(--card-bg);
